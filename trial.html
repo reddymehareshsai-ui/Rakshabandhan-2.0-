@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raksha Bandhan 💖</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Fredoka:wght@600&family=Pacifico&display=swap');
+
+*{box-sizing:border-box}
+
+:root{
+  --bg:#fffaf7;
+  --pink:#e95d91;
+  --branch:#e59aaa;
+  --branch-dark:#d88391;
+  --text:#654e5d;
+}
+
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+body{
+  font-family:"Baloo 2",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.scene{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 9% 18%,rgba(255,220,201,.42),transparent 25%),
+    radial-gradient(circle at 90% 15%,rgba(225,215,255,.35),transparent 25%),
+    linear-gradient(135deg,#fffefa 0%,#fff6f8 54%,#fffaf0 100%);
+}
+
+/* HEART RAIN CONTAINER */
+.heart-rain-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.falling-heart {
+  position: absolute;
+  top: -30px;
+  color: var(--c);
+  font-size: var(--sz);
+  opacity: var(--op);
+  user-select: none;
+  animation: fallAnimation var(--dur) linear infinite;
+}
+
+@keyframes fallAnimation {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(25px);
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(-15px);
+    opacity: 0;
+  }
+}
+
+.moon{
+  position:absolute;
+  left:6%;
+  top:8%;
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 10px 35px rgba(220,130,160,.12);
+}
+.moon:after{
+  content:"";
+  position:absolute;
+  left:27px;
+  top:-11px;
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  background:var(--bg);
+}
+
+.spark{
+  position:absolute;
+  color:#e9a0b9;
+  opacity:.6;
+  animation:twinkle 2.5s infinite ease-in-out;
+}
+.s1{left:23%;top:15%;font-size:23px}
+.s2{left:78%;top:12%;font-size:17px;animation-delay:.7s}
+.s3{left:90%;top:61%;font-size:27px;animation-delay:1.2s}
+.s4{left:13%;top:72%;font-size:18px;animation-delay:1.8s}
+
+@keyframes twinkle{
+  50%{transform:scale(1.3) rotate(18deg);opacity:1}
+}
+
+/* START AREA CONTAINER */
+.start-area{
+  position:absolute;
+  left:50%;
+  top:51%;
+  transform:translate(-50%,-50%);
+  z-index:50;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+  transition:opacity .7s ease;
+}
+
+.heart-button{
+  position:relative;
+  width:58px;
+  height:52px;
+  border:0;
+  padding:0;
+  cursor:pointer;
+  background:linear-gradient(145deg,#ffadc4,#ee6795);
+  filter:drop-shadow(0 10px 15px rgba(226,91,137,.24));
+  transform:rotate(-45deg);
+  border-radius:9px;
+  transition:
+    transform 1.35s cubic-bezier(.7,-.25,.15,1.2),
+    opacity .7s ease,
+    filter 1s ease;
+}
+
+.heart-button:before,
+.heart-button:after{
+  content:"";
+  position:absolute;
+  width:58px;
+  height:52px;
+  border-radius:50%;
+  background:inherit;
+}
+
+.heart-button:before{top:-27px;left:0}
+.heart-button:after{left:27px;top:0}
+
+.heart-button:not(.clicked){
+  animation:heartPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes heartPulse{
+  50%{transform:rotate(-45deg) scale(1.08)}
+}
+
+.heart-button.clicked{
+  animation:none;
+  transform:rotate(-45deg) scale(2.6);
+  opacity:0;
+  filter:blur(2px) drop-shadow(0 15px 25px rgba(226,91,137,.2));
+}
+
+/* BUBBLE TEXT BELOW BUTTON */
+.click-me-bubble{
+  font-family:'Fredoka', "Baloo 2", sans-serif;
+  font-size:20px;
+  font-weight:600;
+  color:var(--pink);
+  background:rgba(255,255,255,0.92);
+  padding:8px 20px;
+  border-radius:25px;
+  box-shadow:0 6px 18px rgba(233,93,145,0.18);
+  border:2px solid #ffd8e4;
+  letter-spacing:0.5px;
+  animation:bubbleBounce 1.8s ease-in-out infinite;
+  user-select:none;
+  pointer-events:none;
+}
+
+@keyframes bubbleBounce{
+  0%, 100%{ transform:translateY(0) scale(1); }
+  50%{ transform:translateY(-6px) scale(1.04); }
+}
+
+.tree-stage{
+  position:absolute;
+  left:50%;
+  top:53%;
+  width:min(50vw,620px);
+  height:min(50vh,500px);
+  transform:translate(-50%,-50%);
+  z-index:20;
+  opacity:0;
+  pointer-events:none;
+  transition:
+    left 1.8s cubic-bezier(.65,0,.2,1),
+    transform 1.8s cubic-bezier(.65,0,.2,1);
+}
+
+.tree-stage.active{
+  opacity:1;
+}
+
+.branch-svg{
+  position:absolute;
+  left:50%;
+  bottom:2%;
+  width:185px;
+  height:345px;
+  transform:translateX(-50%);
+  overflow:visible;
+}
+
+.trunk-path,
+.branch-path{
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke:var(--branch);
+  stroke-width:8;
+  stroke-dasharray:900;
+  stroke-dashoffset:900;
+  transition:stroke-dashoffset 2.2s cubic-bezier(.25,.75,.15,1);
+}
+
+.branch-path{
+  stroke-width:4.5;
+}
+
+.tree-stage.grow .trunk-path{
+  stroke-dashoffset:0;
+}
+
+.tree-stage.grow .branch-path{
+  stroke-dashoffset:0;
+  transition-delay:.75s;
+}
+
+.leaf-heart{
+  position:absolute;
+  left:50%;
+  top:-22%;
+  width:min(420px,52vw);
+  height:min(420px,52vh);
+  overflow:visible;
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+
+.leaf{
+  position:absolute;
+  width:16px;
+  height:13px;
+  border-radius:70% 30% 70% 30%;
+  background:var(--c);
+  box-shadow:0 4px 9px rgba(220,100,140,.13);
+  opacity:0;
+  transform:scale(0) rotate(var(--r));
+  animation:leafAppear .72s var(--d) cubic-bezier(.2,.9,.3,1.25) forwards;
+}
+
+.flower{
+  position:absolute;
+  width:13px;
+  height:13px;
+  border-radius:50%;
+  background:var(--c);
+  box-shadow:
+    0 -7px 0 -3px var(--c),
+    7px 0 0 -3px var(--c),
+    0 7px 0 -3px var(--c),
+    -7px 0 0 -3px var(--c);
+  opacity:0;
+  transform:scale(0);
+  animation:leafAppear .7s var(--d) cubic-bezier(.2,.9,.3,1.25) forwards;
+}
+
+.heart-particle{
+  position:absolute;
+  color:var(--c);
+  font-size:18px;
+  opacity:0;
+  transform:scale(0);
+  animation:leafAppear .75s var(--d) cubic-bezier(.2,.9,.3,1.25) forwards;
+}
+
+@keyframes leafAppear{
+  0%{opacity:0;transform:scale(0) rotate(var(--r))}
+  70%{opacity:1;transform:scale(1.2) rotate(var(--r))}
+  100%{opacity:.96;transform:scale(1) rotate(var(--r))}
+}
+
+.base{
+  position:absolute;
+  bottom:1%;
+  left:50%;
+  width:210px;
+  height:15px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:rgba(200,120,130,.12);
+}
+
+/* SIBLING STICKER BETWEEN TREE AND TEXT */
+.sticker-container{
+  position:absolute;
+  left:38%;
+  top:50%;
+  transform:translate(-50%, -50%) translateX(-40px) scale(0.85);
+  width:min(210px, 22vw);
+  z-index:35;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.2s cubic-bezier(.22,1,.36,1), transform 1.2s cubic-bezier(.22,1,.36,1);
+}
+
+.sticker-container.show{
+  opacity:1;
+  transform:translate(-50%, -50%) translateX(0) scale(1);
+}
+
+.sticker-wrapper{
+  position:relative;
+  background:linear-gradient(135deg, #a51829 0%, #780a16 100%);
+  padding:8px;
+  border-radius:26px;
+  border:3px solid #f6d198;
+  box-shadow:0 12px 28px rgba(139,14,27,0.25);
+  overflow:hidden;
+}
+
+.sticker-wrapper::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  right:0;
+  width:0;
+  height:0;
+  border-style:solid;
+  border-width:0 0 20px 20px;
+  border-color:transparent transparent #fff3df transparent;
+  filter:drop-shadow(-2px -2px 3px rgba(0,0,0,0.18));
+}
+
+.sticker-img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:18px;
+  background:#fff;
+}
+
+.message{
+  position:absolute;
+  right:5%;
+  top:50%;
+  width:min(440px,38vw);
+  transform:translateY(-50%) translateX(35px);
+  opacity:0;
+  z-index:40;
+  pointer-events:none;
+  transition:opacity 1s ease,transform 1s ease;
+}
+
+.message.show{
+  opacity:1;
+  transform:translateY(-50%) translateX(0);
+}
+
+.message .eyebrow{
+  color:#d58aa5;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.message h2{
+  margin:0 0 14px;
+  font-family:Pacifico,cursive;
+  color:var(--pink);
+  font-size:clamp(32px,4vw,54px);
+  line-height:1.18;
+}
+
+.typewriter{
+  font-size:clamp(16px,1.6vw,21px);
+  line-height:1.55;
+  font-weight:600;
+}
+
+.cursor{
+  display:inline-block;
+  width:2px;
+  height:1.05em;
+  background:var(--pink);
+  vertical-align:-2px;
+  animation:blink .75s steps(1) infinite;
+}
+
+@keyframes blink{50%{opacity:0}}
+
+.rakhi{
+  position:absolute;
+  right:3%;
+  bottom:4%;
+  width:120px;
+  height:90px;
+  transform:rotate(10deg);
+  opacity:.72;
+}
+.thread{
+  position:absolute;
+  top:45px;
+  left:5px;
+  width:110px;
+  height:4px;
+  border-radius:5px;
+  background:#e58aa6;
+}
+.rakhi-center{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:42px;
+  height:42px;
+  transform:translate(-50%,-50%) rotate(45deg);
+  background:#ffe18b;
+  border:5px solid #ffafc3;
+  border-radius:10px;
+}
+.rakhi-center:after{
+  content:"";
+  position:absolute;
+  width:12px;height:12px;
+  border-radius:50%;
+  background:#e95d91;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%) rotate(-45deg);
+}
+
+.tree-stage.slide{
+  left:16%;
+  transform:translate(-50%,-50%) scale(.82);
+}
+
+@media(max-width:920px){
+  .tree-stage.slide{
+    left:2%;
+    transform:translate(-15%,-50%) scale(.52);
+  }
+
+  .sticker-container{
+    left:50%;
+    top:62%;
+    width:150px;
+  }
+
+  .message{
+    left:5%;
+    right:auto;
+    top:80%;
+    width:90vw;
+    text-align:center;
+  }
+
+  .message.show{
+    transform:translateY(-50%);
+  }
+
+  .message h2{font-size:32px}
+  .message .eyebrow{font-size:10px}
+}
+</style>
+</head>
+
+<body>
+<div class="scene">
+
+  <!-- Background Heart Rain Container -->
+  <div class="heart-rain-container" id="heartRain"></div>
+
+  <div class="moon"></div>
+  <div class="spark s1">✦</div>
+  <div class="spark s2">✧</div>
+  <div class="spark s3">✦</div>
+  <div class="spark s4">✧</div>
+
+  <div class="start-area" id="startArea">
+    <button class="heart-button" id="heartButton" aria-label="Start"></button>
+    <div class="click-me-bubble">Click me!!</div>
+  </div>
+
+  <section class="tree-stage" id="treeStage">
+    <svg class="branch-svg" viewBox="0 0 270 500" aria-hidden="true">
+      <path class="trunk-path"
+        d="M135 490
+           C133 445 128 400 130 355
+           C132 315 139 275 138 235
+           C137 190 129 145 126 92" />
+
+      <path class="branch-path"
+        d="M130 365 C105 344 78 323 48 312
+           M130 320 C154 296 181 279 214 268
+           M132 280 C108 258 84 241 55 229
+           M137 242 C159 221 183 205 207 190
+           M134 204 C111 181 92 165 69 151
+           M131 166 C151 145 172 129 192 113
+           M128 130 C113 111 101 94 94 73" />
+    </svg>
+
+    <div class="leaf-heart" id="leafHeart"></div>
+    <div class="base"></div>
+  </section>
+
+  <!-- STICKER WITH YOUR SAVED IMAGE (RBimg.jpg) -->
+  <div class="sticker-container" id="stickerContainer">
+    <div class="sticker-wrapper">
+      <img class="sticker-img" src="RBimg.jpg" alt="Brother and Sister Rakhi Sticker" />
+    </div>
+  </div>
+
+  <section class="message" id="message">
+    <div class="eyebrow">For the best sibling in the world</div>
+    <h2>My Dear Sister 💖</h2>
+    <div class="typewriter">
+      <span id="typed"></span><span class="cursor"></span>
+    </div>
+  </section>
+
+  <div class="rakhi" aria-hidden="true">
+    <div class="thread"></div>
+    <div class="rakhi-center"></div>
+  </div>
+
+</div>
+
+<script>
+const button=document.getElementById("heartButton");
+const startArea=document.getElementById("startArea");
+const treeStage=document.getElementById("treeStage");
+const leafHeart=document.getElementById("leafHeart");
+const message=document.getElementById("message");
+const stickerContainer=document.getElementById("stickerContainer");
+const typed=document.getElementById("typed");
+const heartRainContainer=document.getElementById("heartRain");
+
+const colors=[
+  "#ff78a7","#ff9fbd","#ffc27e","#ffe48c",
+  "#c8b5ff","#ffb096","#f3a6cf","#ffcf9e","#e95d91"
+];
+
+let clicked=false;
+
+/* FUNCTION TO CREATE FALLING BACKGROUND HEARTS */
+function startHeartRain() {
+  const heartSymbols = ["♥", "💖", "🌸", "💕"];
+  const totalHearts = 30;
+
+  for (let i = 0; i < totalHearts; i++) {
+    const heart = document.createElement("div");
+    heart.className = "falling-heart";
+    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+    
+    // Random styling properties using leaf palette
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.setProperty("--c", colors[Math.floor(Math.random() * colors.length)]);
+    heart.style.setProperty("--sz", (Math.random() * 14 + 10) + "px");
+    heart.style.setProperty("--op", (Math.random() * 0.4 + 0.3).toFixed(2));
+    heart.style.setProperty("--dur", (Math.random() * 6 + 6) + "s");
+    heart.style.animationDelay = (Math.random() * 5) + "s";
+
+    heartRainContainer.appendChild(heart);
+  }
+}
+
+function heartPoints(count){
+  const points=[];
+  let attempts=0;
+
+  while(points.length < count && attempts < count * 100){
+    attempts++;
+
+    const x = -1.3 + Math.random() * 2.6;
+    const y = -1.1 + Math.random() * 2.3;
+    
+    const inside = Math.pow(x*x + y*y - 1, 3) - x*x * Math.pow(y, 3) <= 0;
+
+    if(inside){
+      const px = 50 + x * 36;
+      const py = 48 - y * 36;
+      points.push({x: px, y: py});
+    }
+  }
+
+  const upperLobeClusters = [
+    {cx: 32, cy: 18, rx: 14, ry: 10},
+    {cx: 68, cy: 18, rx: 14, ry: 10},
+    {cx: 50, cy: 30, rx: 10, ry: 6}
+  ];
+
+  upperLobeClusters.forEach(cluster => {
+    for(let i = 0; i < 35; i++){
+      const angle = Math.random() * Math.PI * 2;
+      const radius = Math.sqrt(Math.random());
+      points.push({
+        x: cluster.cx + Math.cos(angle) * cluster.rx * radius,
+        y: cluster.cy + Math.sin(angle) * cluster.ry * radius
+      });
+    }
+  });
+
+  return points;
+}
+
+function buildHeartTree(){
+  leafHeart.innerHTML = "";
+
+  const count = window.innerWidth < 760 ? 260 : 450;
+  const points = heartPoints(count);
+
+  points.forEach((p, i) => {
+    const el = document.createElement("div");
+    const type = Math.random();
+
+    el.style.left = p.x + "%";
+    el.style.top = p.y + "%";
+    el.style.setProperty("--c", colors[Math.floor(Math.random() * colors.length)]);
+    
+    const delay = 0.1 + (p.y / 100) * 1.8 + Math.random() * 0.4;
+    el.style.setProperty("--d", delay + "s");
+    el.style.setProperty("--r", (Math.random() * 160 - 80) + "deg");
+
+    if(type < 0.65){
+      el.className = "leaf";
+    } else if(type < 0.88){
+      el.className = "flower";
+    } else {
+      el.className = "heart-particle";
+      el.textContent = "♥";
+    }
+
+    leafHeart.appendChild(el);
+  });
+}
+
+const messageText =
+"No matter how much we grow up, the little fights, silly jokes, endless teasing and unforgettable memories will always stay close to my heart. Thank you for making life brighter. Wishing you endless happiness, laughter and love. Happy Raksha Bandhan! 🌸💫";
+
+function typeWriter(text, speed = 36){
+  let i = 0;
+  const timer = setInterval(() => {
+    typed.textContent += text[i++];
+    if(i >= text.length) clearInterval(timer);
+  }, speed);
+}
+
+button.addEventListener("click", () => {
+  if(clicked) return;
+  clicked = true;
+
+  button.classList.add("clicked");
+
+  setTimeout(() => {
+    startArea.style.opacity = "0";
+    treeStage.classList.add("active");
+
+    requestAnimationFrame(() => {
+      treeStage.classList.add("grow");
+    });
+  }, 850);
+
+  setTimeout(() => {
+    buildHeartTree();
+    startHeartRain(); // Starts gentle background heart rain
+  }, 2300);
+
+  setTimeout(() => {
+    treeStage.classList.add("slide");
+
+    setTimeout(() => {
+      stickerContainer.classList.add("show");
+      message.classList.add("show");
+      typeWriter(messageText);
+    }, 1000);
+
+  }, 6500);
+});
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raksha Bandhan 💖</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Fredoka:wght@600&family=Pacifico&display=swap');
+
+*{box-sizing:border-box}
+
+:root{
+  --bg:#fffaf7;
+  --pink:#e95d91;
+  --branch:#e59aaa;
+  --branch-dark:#d88391;
+  --text:#654e5d;
+}
+
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+body{
+  font-family:"Baloo 2",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.scene{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 9% 18%,rgba(255,220,201,.42),transparent 25%),
+    radial-gradient(circle at 90% 15%,rgba(225,215,255,.35),transparent 25%),
+    linear-gradient(135deg,#fffefa 0%,#fff6f8 54%,#fffaf0 100%);
+}
+
+/* HEART RAIN CONTAINER */
+.heart-rain-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.falling-heart {
+  position: absolute;
+  top: -30px;
+  color: var(--c);
+  font-size: var(--sz);
+  opacity: var(--op);
+  user-select: none;
+  animation: fallAnimation var(--dur) linear infinite;
+}
+
+@keyframes fallAnimation {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(25px);
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(-15px);
+    opacity: 0;
+  }
+}
+
+.moon{
+  position:absolute;
+  left:6%;
+  top:8%;
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 10px 35px rgba(220,130,160,.12);
+}
+.moon:after{
+  content:"";
+  position:absolute;
+  left:27px;
+  top:-11px;
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  background:var(--bg);
+}
+
+.spark{
+  position:absolute;
+  color:#e9a0b9;
+  opacity:.6;
+  animation:twinkle 2.5s infinite ease-in-out;
+}
+.s1{left:23%;top:15%;font-size:23px}
+.s2{left:78%;top:12%;font-size:17px;animation-delay:.7s}
+.s3{left:90%;top:61%;font-size:27px;animation-delay:1.2s}
+.s4{left:13%;top:72%;font-size:18px;animation-delay:1.8s}
+
+@keyframes twinkle{
+  50%{transform:scale(1.3) rotate(18deg);opacity:1}
+}
+
+/* START AREA CONTAINER */
+.start-area{
+  position:absolute;
+  left:50%;
+  top:51%;
+  transform:translate(-50%,-50%);
+  z-index:50;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+  transition:opacity .7s ease;
+}
+
+.heart-button{
+  position:relative;
+  width:58px;
+  height:52px;
+  border:0;
+  padding:0;
+  cursor:pointer;
+  background:linear-gradient(145deg,#ffadc4,#ee6795);
+  filter:drop-shadow(0 10px 15px rgba(226,91,137,.24));
+  transform:rotate(-45deg);
+  border-radius:9px;
+  transition:
+    transform 1.35s cubic-bezier(.7,-.25,.15,1.2),
+    opacity .7s ease,
+    filter 1s ease;
+}
+
+.heart-button:before,
+.heart-button:after{
+  content:"";
+  position:absolute;
+  width:58px;
+  height:52px;
+  border-radius:50%;
+  background:inherit;
+}
+
+.heart-button:before{top:-27px;left:0}
+.heart-button:after{left:27px;top:0}
+
+.heart-button:not(.clicked){
+  animation:heartPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes heartPulse{
+  50%{transform:rotate(-45deg) scale(1.08)}
+}
+
+.heart-button.clicked{
+  animation:none;
+  transform:rotate(-45deg) scale(2.6);
+  opacity:0;
+  filter:blur(2px) drop-shadow(0 15px 25px rgba(226,91,137,.2));
+}
+
+/* BUBBLE TEXT BELOW BUTTON */
+.click-me-bubble{
+  font-family:'Fredoka', "Baloo 2", sans-serif;
+  font-size:20px;
+  font-weight:600;
+  color:var(--pink);
+  background:rgba(255,255,255,0.92);
+  padding:8px 20px;
+  border-radius:25px;
+  box-shadow:0 6px 18px rgba(233,93,145,0.18);
+  border:2px solid #ffd8e4;
+  letter-spacing:0.5px;
+  animation:bubbleBounce 1.8s ease-in-out infinite;
+  user-select:none;
+  pointer-events:none;
+}
+
+@keyframes bubbleBounce{
+  0%, 100%{ transform:translateY(0) scale(1); }
+  50%{ transform:translateY(-6px) scale(1.04); }
+}
+
+.tree-stage{
+  position:absolute;
+  left:50%;
+  top:53%;
+  width:min(50vw,620px);
+  height:min(50vh,500px);
+  transform:translate(-50%,-50%);
+  z-index:20;
+  opacity:0;
+  pointer-events:none;
+  transition:
+    left 1.8s cubic-bezier(.65,0,.2,1),
+    transform 1.8s cubic-bezier(.65,0,.2,1);
+}
+
+.tree-stage.active{
+  opacity:1;
+}
+
+.branch-svg{
+  position:absolute;
+  left:50%;
+  bottom:2%;
+  width:185px;
+  height:345px;
+  transform:translateX(-50%);
+  overflow:visible;
+}
+
+.trunk-path,
+.branch-path{
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke:var(--branch);
+  stroke-width:8;
+  stroke-dasharray:900;
+  stroke-dashoffset:900;
+  transition:stroke-dashoffset 2.2s cubic-bezier(.25,.75,.15,1);
+}
+
+.branch-path{
+  stroke-width:4.5;
+}
+
+.tree-stage.grow .trunk-path{
+  stroke-dashoffset:0;
+}
+
+.tree-stage.grow .branch-path{
+  stroke-dashoffset:0;
+  transition-delay:.75s;
+}
+
+.leaf-heart{
+  position:absolute;
+  left:50%;
+  top:-22%;
+  width:min(420px,52vw);
+  height:min(420px,52vh);
+  overflow:visible;
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+
+.leaf{
+  position:absolute;
+  width:16px;
+  height:13px;
+  border-radius:70% 30% 70% 30%;
+  background:var(--c);
+  box-shadow:0 4px 9px rgba(220,100,140,.13);
+  opacity:0;
+  transform:scale(0) rotate(var(--r));
+  animation:leafAppear .72s var(--d) cubic-bezier(.2,.9,.3,1.25) forwards;
+}
+
+.flower{
+  position:absolute;
+  width:13px;
+  height:13px;
+  border-radius:50%;
+  background:var(--c);
+  box-shadow:
+    0 -7px 0 -3px var(--c),
+    7px 0 0 -3px var(--c),
+    0 7px 0 -3px var(--c),
+    -7px 0 0 -3px var(--c);
+  opacity:0;
+  transform:scale(0);
+  animation:leafAppear .7s var(--d) cubic-bezier(.2,.9,.3,1.25) forwards;
+}
+
+.heart-particle{
+  position:absolute;
+  color:var(--c);
+  font-size:18px;
+  opacity:0;
+  transform:scale(0);
+  animation:leafAppear .75s var(--d) cubic-bezier(.2,.9,.3,1.25) forwards;
+}
+
+@keyframes leafAppear{
+  0%{opacity:0;transform:scale(0) rotate(var(--r))}
+  70%{opacity:1;transform:scale(1.2) rotate(var(--r))}
+  100%{opacity:.96;transform:scale(1) rotate(var(--r))}
+}
+
+.base{
+  position:absolute;
+  bottom:1%;
+  left:50%;
+  width:210px;
+  height:15px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:rgba(200,120,130,.12);
+}
+
+/* SIBLING STICKER BETWEEN TREE AND TEXT */
+.sticker-container{
+  position:absolute;
+  left:38%;
+  top:50%;
+  transform:translate(-50%, -50%) translateX(-40px) scale(0.85);
+  width:min(210px, 22vw);
+  z-index:35;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.2s cubic-bezier(.22,1,.36,1), transform 1.2s cubic-bezier(.22,1,.36,1);
+}
+
+.sticker-container.show{
+  opacity:1;
+  transform:translate(-50%, -50%) translateX(0) scale(1);
+}
+
+.sticker-wrapper{
+  position:relative;
+  background:linear-gradient(135deg, #a51829 0%, #780a16 100%);
+  padding:8px;
+  border-radius:26px;
+  border:3px solid #f6d198;
+  box-shadow:0 12px 28px rgba(139,14,27,0.25);
+  overflow:hidden;
+}
+
+.sticker-wrapper::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  right:0;
+  width:0;
+  height:0;
+  border-style:solid;
+  border-width:0 0 20px 20px;
+  border-color:transparent transparent #fff3df transparent;
+  filter:drop-shadow(-2px -2px 3px rgba(0,0,0,0.18));
+}
+
+.sticker-img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:18px;
+  background:#fff;
+}
+
+.message{
+  position:absolute;
+  right:5%;
+  top:50%;
+  width:min(440px,38vw);
+  transform:translateY(-50%) translateX(35px);
+  opacity:0;
+  z-index:40;
+  pointer-events:none;
+  transition:opacity 1s ease,transform 1s ease;
+}
+
+.message.show{
+  opacity:1;
+  transform:translateY(-50%) translateX(0);
+}
+
+.message .eyebrow{
+  color:#d58aa5;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.message h2{
+  margin:0 0 14px;
+  font-family:Pacifico,cursive;
+  color:var(--pink);
+  font-size:clamp(32px,4vw,54px);
+  line-height:1.18;
+}
+
+.typewriter{
+  font-size:clamp(16px,1.6vw,21px);
+  line-height:1.55;
+  font-weight:600;
+}
+
+.cursor{
+  display:inline-block;
+  width:2px;
+  height:1.05em;
+  background:var(--pink);
+  vertical-align:-2px;
+  animation:blink .75s steps(1) infinite;
+}
+
+@keyframes blink{50%{opacity:0}}
+
+.rakhi{
+  position:absolute;
+  right:3%;
+  bottom:4%;
+  width:120px;
+  height:90px;
+  transform:rotate(10deg);
+  opacity:.72;
+}
+.thread{
+  position:absolute;
+  top:45px;
+  left:5px;
+  width:110px;
+  height:4px;
+  border-radius:5px;
+  background:#e58aa6;
+}
+.rakhi-center{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:42px;
+  height:42px;
+  transform:translate(-50%,-50%) rotate(45deg);
+  background:#ffe18b;
+  border:5px solid #ffafc3;
+  border-radius:10px;
+}
+.rakhi-center:after{
+  content:"";
+  position:absolute;
+  width:12px;height:12px;
+  border-radius:50%;
+  background:#e95d91;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%) rotate(-45deg);
+}
+
+.tree-stage.slide{
+  left:16%;
+  transform:translate(-50%,-50%) scale(.82);
+}
+
+@media(max-width:920px){
+  .tree-stage.slide{
+    left:2%;
+    transform:translate(-15%,-50%) scale(.52);
+  }
+
+  .sticker-container{
+    left:50%;
+    top:62%;
+    width:150px;
+  }
+
+  .message{
+    left:5%;
+    right:auto;
+    top:80%;
+    width:90vw;
+    text-align:center;
+  }
+
+  .message.show{
+    transform:translateY(-50%);
+  }
+
+  .message h2{font-size:32px}
+  .message .eyebrow{font-size:10px}
+}
+</style>
+</head>
+
+<body>
+<div class="scene">
+
+  <!-- Background Heart Rain Container -->
+  <div class="heart-rain-container" id="heartRain"></div>
+
+  <div class="moon"></div>
+  <div class="spark s1">✦</div>
+  <div class="spark s2">✧</div>
+  <div class="spark s3">✦</div>
+  <div class="spark s4">✧</div>
+
+  <div class="start-area" id="startArea">
+    <button class="heart-button" id="heartButton" aria-label="Start"></button>
+    <div class="click-me-bubble">Click me!!</div>
+  </div>
+
+  <section class="tree-stage" id="treeStage">
+    <svg class="branch-svg" viewBox="0 0 270 500" aria-hidden="true">
+      <path class="trunk-path"
+        d="M135 490
+           C133 445 128 400 130 355
+           C132 315 139 275 138 235
+           C137 190 129 145 126 92" />
+
+      <path class="branch-path"
+        d="M130 365 C105 344 78 323 48 312
+           M130 320 C154 296 181 279 214 268
+           M132 280 C108 258 84 241 55 229
+           M137 242 C159 221 183 205 207 190
+           M134 204 C111 181 92 165 69 151
+           M131 166 C151 145 172 129 192 113
+           M128 130 C113 111 101 94 94 73" />
+    </svg>
+
+    <div class="leaf-heart" id="leafHeart"></div>
+    <div class="base"></div>
+  </section>
+
+  <!-- STICKER WITH YOUR SAVED IMAGE (RBimg.jpg) -->
+  <div class="sticker-container" id="stickerContainer">
+    <div class="sticker-wrapper">
+      <img class="sticker-img" src="RBimg.jpg" alt="Brother and Sister Rakhi Sticker" />
+    </div>
+  </div>
+
+  <section class="message" id="message">
+    <div class="eyebrow">For the best sibling in the world</div>
+    <h2>My Dear Sister 💖</h2>
+    <div class="typewriter">
+      <span id="typed"></span><span class="cursor"></span>
+    </div>
+  </section>
+
+  <div class="rakhi" aria-hidden="true">
+    <div class="thread"></div>
+    <div class="rakhi-center"></div>
+  </div>
+
+</div>
+
+<script>
+const button=document.getElementById("heartButton");
+const startArea=document.getElementById("startArea");
+const treeStage=document.getElementById("treeStage");
+const leafHeart=document.getElementById("leafHeart");
+const message=document.getElementById("message");
+const stickerContainer=document.getElementById("stickerContainer");
+const typed=document.getElementById("typed");
+const heartRainContainer=document.getElementById("heartRain");
+
+const colors=[
+  "#ff78a7","#ff9fbd","#ffc27e","#ffe48c",
+  "#c8b5ff","#ffb096","#f3a6cf","#ffcf9e","#e95d91"
+];
+
+let clicked=false;
+
+/* FUNCTION TO CREATE FALLING BACKGROUND HEARTS */
+function startHeartRain() {
+  const heartSymbols = ["♥", "💖", "🌸", "💕"];
+  const totalHearts = 30;
+
+  for (let i = 0; i < totalHearts; i++) {
+    const heart = document.createElement("div");
+    heart.className = "falling-heart";
+    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+    
+    // Random styling properties using leaf palette
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.setProperty("--c", colors[Math.floor(Math.random() * colors.length)]);
+    heart.style.setProperty("--sz", (Math.random() * 14 + 10) + "px");
+    heart.style.setProperty("--op", (Math.random() * 0.4 + 0.3).toFixed(2));
+    heart.style.setProperty("--dur", (Math.random() * 6 + 6) + "s");
+    heart.style.animationDelay = (Math.random() * 5) + "s";
+
+    heartRainContainer.appendChild(heart);
+  }
+}
+
+function heartPoints(count){
+  const points=[];
+  let attempts=0;
+
+  while(points.length < count && attempts < count * 100){
+    attempts++;
+
+    const x = -1.3 + Math.random() * 2.6;
+    const y = -1.1 + Math.random() * 2.3;
+    
+    const inside = Math.pow(x*x + y*y - 1, 3) - x*x * Math.pow(y, 3) <= 0;
+
+    if(inside){
+      const px = 50 + x * 36;
+      const py = 48 - y * 36;
+      points.push({x: px, y: py});
+    }
+  }
+
+  const upperLobeClusters = [
+    {cx: 32, cy: 18, rx: 14, ry: 10},
+    {cx: 68, cy: 18, rx: 14, ry: 10},
+    {cx: 50, cy: 30, rx: 10, ry: 6}
+  ];
+
+  upperLobeClusters.forEach(cluster => {
+    for(let i = 0; i < 35; i++){
+      const angle = Math.random() * Math.PI * 2;
+      const radius = Math.sqrt(Math.random());
+      points.push({
+        x: cluster.cx + Math.cos(angle) * cluster.rx * radius,
+        y: cluster.cy + Math.sin(angle) * cluster.ry * radius
+      });
+    }
+  });
+
+  return points;
+}
+
+function buildHeartTree(){
+  leafHeart.innerHTML = "";
+
+  const count = window.innerWidth < 760 ? 260 : 450;
+  const points = heartPoints(count);
+
+  points.forEach((p, i) => {
+    const el = document.createElement("div");
+    const type = Math.random();
+
+    el.style.left = p.x + "%";
+    el.style.top = p.y + "%";
+    el.style.setProperty("--c", colors[Math.floor(Math.random() * colors.length)]);
+    
+    const delay = 0.1 + (p.y / 100) * 1.8 + Math.random() * 0.4;
+    el.style.setProperty("--d", delay + "s");
+    el.style.setProperty("--r", (Math.random() * 160 - 80) + "deg");
+
+    if(type < 0.65){
+      el.className = "leaf";
+    } else if(type < 0.88){
+      el.className = "flower";
+    } else {
+      el.className = "heart-particle";
+      el.textContent = "♥";
+    }
+
+    leafHeart.appendChild(el);
+  });
+}
+
+const messageText =
+"No matter how much we grow up, the little fights, silly jokes, endless teasing and unforgettable memories will always stay close to my heart. Thank you for making life brighter. Wishing you endless happiness, laughter and love. Happy Raksha Bandhan! 🌸💫";
+
+function typeWriter(text, speed = 36){
+  let i = 0;
+  const timer = setInterval(() => {
+    typed.textContent += text[i++];
+    if(i >= text.length) clearInterval(timer);
+  }, speed);
+}
+
+button.addEventListener("click", () => {
+  if(clicked) return;
+  clicked = true;
+
+  button.classList.add("clicked");
+
+  setTimeout(() => {
+    startArea.style.opacity = "0";
+    treeStage.classList.add("active");
+
+    requestAnimationFrame(() => {
+      treeStage.classList.add("grow");
+    });
+  }, 850);
+
+  setTimeout(() => {
+    buildHeartTree();
+    startHeartRain(); // Starts gentle background heart rain
+  }, 2300);
+
+  setTimeout(() => {
+    treeStage.classList.add("slide");
+
+    setTimeout(() => {
+      stickerContainer.classList.add("show");
+      message.classList.add("show");
+      typeWriter(messageText);
+    }, 1000);
+
+  }, 6500);
+});
+</script>
+
+</body>
+</html>
